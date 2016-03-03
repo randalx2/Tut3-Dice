@@ -28,12 +28,12 @@ public: Dice()
 			accresult = 0;
 }
 
-		Dice(int resnew)   //Overloading constructor
+		Dice(int resnew)   //Overloading constructor -- May be needed later
 		{
 			srand((unsigned)time(NULL));
 			rand(); rand(); rand();
 			result = resnew;
-			
+			accresult = 0;
 		}
 
 		int roll()                        //Method which returns the result of a roll when called.
