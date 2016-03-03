@@ -18,18 +18,17 @@ private: int result;  //integer attribute to store the result of a roll
 		 int rolls;   //integer attribute to store the number of rolls
 
 public: Dice()
-{// Default Constructor to set up dice
+{                               // Default Constructor to set up dice
 			srand(time(NULL)); //seed the randomizer
 			result = rand() % 6 + 1;   //The initial result of the dice can be anything between 1 and 6
-			rolls = 0;               //initially we have no rolls unless we call the roll method
+			rolls = 0;                //initially we have no rolls unless we call the roll method
 			cout << "Dice created with " << rolls << " rolls and " << result << " as the result" << endl;
 }
 
 		int roll()
 		{
-			rolls++;                 //Each time this method is called, the value of the number of rolls is 
-			incremented
-				result = rand() % 6 + 1; // Value of the result is changed randomly once again
+			rolls++;                  //Each time this method is called, the value of the number of rolls is incremented
+			result = rand() % 6 + 1; // Value of the result is changed randomly once again
 			cout << "Result of new roll is " << result << endl;
 			cout << "Number of rolls performed is " << rolls << endl;
 
