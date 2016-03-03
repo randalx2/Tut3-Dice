@@ -81,13 +81,6 @@ int main()
 		cout << "Average: " << average(*d1, rolls) << endl;  // Function works except it doesn't return float values at this point 3 March 2015
 	}
 
-	//Print out array to show recorded values
-	/**for (int counter = 0; counter < rolls; counter++)
-	{
-		cout << "Index " << counter << " is " << *(pointer + counter) << endl;
-	}**/
-	
-
 	delete pointer;
 	delete d1;  //Done using dice object so remove it from memory
 	system("PAUSE");
