@@ -40,7 +40,7 @@ public: Dice()
 			return result; 			
 		}    //insert a conditional loop in main program to keep rolling unless a termination character is input
 
-		void display_rolls_done()  //Method used to access the private attribute result and display it
+		void display_rolls_done()  //Method used to access the private attribute of rolls and display it
 		{
 			cout << "Number of Rolls  is: " << rolls << endl;
 		}
