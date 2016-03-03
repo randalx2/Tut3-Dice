@@ -19,26 +19,27 @@ private:  int result;   //integer attribute to store the result of a roll
 
 public: Dice()
 {                               // Default Constructor to set up dice
-			srand(time(NULL)); //seed the randomizer
+			srand((unsigned)time(NULL)); //seed the randomizer
+			rand(); // call rand function a few times to get a good seed
+			rand();
+			rand();
 			result = 0;       // We won't consider a result unless the dice has been rolled
 			//rolls = 0;        //initially we have no rolls unless we call the roll method
 			
 }
 
-		Dice(int resnew, int rollsnew)   //Overloading constructor
+		Dice(int resnew)   //Overloading constructor
 		{
+			srand(time(NULL));
 			result = resnew;
 			//rolls = rollsnew;
 		}
 
-		int roll() //Method which return the result of a roll when called. Also increments roll count
+		int roll()                        //Method which returns the result of a roll when called.
 		{
-			//int resnew = 0, rollsnew = 0; //initialize variables to hold updated values
-			//rolls++;                     //Each time this method is called, the value of the number of rolls is incremented
 			result = rand() % 6 + 1;     // Value of the result is changed randomly 
-
 			return result; 			
-		}    //insert a conditional loop in main program to keep rolling unless a termination character is input
+		}                               //insert a conditional loop in main program to keep rolling unless a termination character is input
 
 		~Dice()
 		{
@@ -64,34 +65,48 @@ int main()
 	//The user should be able to keep rolling his dice unless he enters a specific character to terminate the game
 	while (userinput != 'n')
 	{
-		
 		cout << "Enter any character EXCEPT 'n' to do a dice roll. Enter 'n' to stop " << endl;
 		cin >> userinput;
+		temp = d1->roll();
 		rolls++;
 		pointer = new int[rolls]; // set the array dynamically according to number of rolls each time
-		                         //dynamically allocated arrays allows an array of increasing size
-		temp = d1->roll();
+		                          //dynamically allocated arrays allows an array of increasing size
+		                          //Dynamic Memory Allocation allows you to use a variable to specify the array size
+
 		cout << "Result is: " << temp << endl; //Display the result
 		cout << "Number of Rolls: " << rolls << endl;
+		cout << "Average is " << average(*d1, rolls) << endl;
 
-		 //Fill out the array with each index holding the result value of each of the rolls respectively
+
+		//Fill out the array with each index holding the result value of each of the rolls respectively
 		for (int counter = 0; counter < rolls; counter++)
 		{
 			*(pointer + counter) = temp; // assign the next array index value with the value stored in temp			   
 			//memory addresses in arrays are left justified so increment by one to get to next value	
 		}
 		for (int counter = 0; counter < rolls; counter++)
-		{		
-			cout << "Index " << counter + 1 << " is " << *(pointer + counter) << endl; //We already filled out the array previously
+		{
+			cout << "Index " << counter << " is " << *(pointer + counter) << endl; //We already filled out the array previously
 		}
-		
 
 	}
+	
 
 	delete pointer;
 	delete d1;  //Done using dice object so remove it from memory
 	system("PAUSE");
 	return 0;
+}
+
+float average(Dice d, int rolls)
+{
+	float ave = 0.00;
+	int addresult = 0;
+
+	addresult = addresult + d.roll();
+	ave = float(addresult / rolls);
+
+	return ave;	
 }
 
 //
