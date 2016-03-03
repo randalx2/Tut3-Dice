@@ -15,8 +15,9 @@ using namespace std;
 class Dice
 {
 private:  int result;   //integer attribute to store the result of a roll
-
-
+public:		  int accresult; //accumulated result of dice rolls (addition)
+			                 //made this public so it will be available to global functions
+			                //once object is passed to them
 public: Dice()
 {                               // Default Constructor to set up dice
 			srand((unsigned)time(NULL)); //seed the randomizer
@@ -24,6 +25,7 @@ public: Dice()
 			rand();
 			rand();
 			result = 0;       // We won't consider a result unless the dice has been rolled	
+			accresult = 0;
 }
 
 		Dice(int resnew)   //Overloading constructor
@@ -31,12 +33,14 @@ public: Dice()
 			srand((unsigned)time(NULL));
 			rand(); rand(); rand();
 			result = resnew;
-			//rolls = rollsnew;
+			
 		}
 
 		int roll()                        //Method which returns the result of a roll when called.
 		{
 			result = rand() % 6 + 1;     // Value of the result is changed randomly 
+			accresult = accresult + result; //Value accumulation
+
 			return result; 			
 		}                               //insert a conditional loop in main program to keep rolling unless a termination character is input
 
@@ -70,17 +74,11 @@ int main()
 		pointer = new int[rolls]; // set the array dynamically according to number of rolls each time
 		                          //dynamically allocated arrays allows an array of increasing size
 		                          //Dynamic Memory Allocation allows you to use a variable to specify the array size
-
 		temp = d1->roll();
-		*(pointer + (rolls - 1)) = temp; //write the result successively to an array index
-
-	
-		/*Attempt to print out the entire array with the recorded values to verify*/
-
 		cout << "Result: " << temp << endl;
 		cout << "Rolls: " << rolls << endl;
-		cout << "Average: " << average(pointer[rolls], rolls) << endl;
-		cout << "Index " << (rolls - 1) << " is " << *(pointer + (rolls - 1)) << endl;
+		cout << "Accumulated: " << d1->accresult << endl;
+		cout << "Average: " << average(*d1, rolls) << endl;  // Function works except it doesn't return float values at this point 3 March 2015
 	}
 
 	//Print out array to show recorded values
@@ -98,11 +96,7 @@ int main()
 
 float average(Dice d, int rolls)
 {
-	float ave = 0.00;
-	int addresult = 0;
-
-	addresult = addresult + d.roll();
-	ave = float(addresult / rolls);
+	float ave = float(d.accresult / rolls);
 
 	return ave;	
 }
@@ -115,8 +109,8 @@ float average(int arr[], int arraylength)
 	for (int counter = 0; counter < arraylength; counter++)
 	{
 		addresult = addresult + arr[counter];
-		ave = float(addresult / arraylength);
 	}
+	ave = float(addresult / arraylength);
 
 	return ave;
 }
