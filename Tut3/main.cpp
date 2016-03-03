@@ -14,8 +14,8 @@ using namespace std;
 
 class Dice
 {
-private: int result;  //integer attribute to store the result of a roll
-		 int rolls;   //integer attribute to store the number of rolls
+private:  int result;   //integer attribute to store the result of a roll
+		  int rolls;   //integer attribute to store the number of rolls
 
 public: Dice()
 {                               // Default Constructor to set up dice
@@ -25,15 +25,25 @@ public: Dice()
 			cout << "Dice created with " << rolls << " rolls and " << result << " as the result" << endl;
 }
 
-		int roll()
+		Dice(int resnew, int rollsnew)   //Overloading constructor
 		{
-			rolls++;                  //Each time this method is called, the value of the number of rolls is incremented
-			result = rand() % 6 + 1; // Value of the result is changed randomly once again
-			cout << "Result of new roll is " << result << endl;
-			cout << "Number of rolls performed is " << rolls << endl;
+			result = resnew;
+			rolls = rollsnew;
+		}
 
-			return result;
+		int roll() //Method which return the result of a roll when called. Also increments roll count
+		{
+			//int resnew = 0, rollsnew = 0; //initialize variables to hold updated values
+			rolls++;                     //Each time this method is called, the value of the number of rolls is incremented
+			result = rand() % 6 + 1;     // Value of the result is changed randomly once again
+
+			return result; 			
 		}    //insert a conditional loop in main program to keep rolling unless a termination character is input
+
+		void display_rolls_done()  //Method used to access the private attribute result and display it
+		{
+			cout << "Number of Rolls  is: " << rolls << endl;
+		}
 
 		~Dice()
 		{
@@ -45,7 +55,7 @@ public: Dice()
 
 //Defining global overloaded functions prototypes
 float average(Dice d, int rolls);        //receives a dice object and the number of rolls
-float average(int arr[], int arrinput); // receives an integer array as well as the number of integers for that array
+float average(int arr[], int arraylength); // receives an integer array as well as the number of integers for that array
 
 int main()
 {
@@ -57,10 +67,13 @@ int main()
 	{
 		cout << "Enter any character EXCEPT 'n' to do a dice roll. Enter 'n' to stop " << endl;
 		cin >> userinput;
-
-		d1->roll();
+		cout << "Result is: " << d1->roll() << endl; //Display the result
+		d1->display_rolls_done();            //Display the number of rolls done on dice d1
+			
 	}
 
+	delete d1;  //Done using dice object so remove it from memory
 	system("PAUSE");
 	return 0;
 }
+
