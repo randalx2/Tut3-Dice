@@ -15,22 +15,21 @@ using namespace std;
 class Dice
 {
 private:  int result;   //integer attribute to store the result of a roll
-//public:	  int rolls;   //integer attribute to store the number of rolls
+
 
 public: Dice()
 {                               // Default Constructor to set up dice
 			srand((unsigned)time(NULL)); //seed the randomizer
-			rand(); // call rand function a few times to get a good seed
+			rand();             // call rand function a few times to get a good seed
 			rand();
 			rand();
-			result = 0;       // We won't consider a result unless the dice has been rolled
-			//rolls = 0;        //initially we have no rolls unless we call the roll method
-			
+			result = 0;       // We won't consider a result unless the dice has been rolled	
 }
 
 		Dice(int resnew)   //Overloading constructor
 		{
-			srand(time(NULL));
+			srand((unsigned)time(NULL));
+			rand(); rand(); rand();
 			result = resnew;
 			//rolls = rollsnew;
 		}
@@ -67,29 +66,28 @@ int main()
 	{
 		cout << "Enter any character EXCEPT 'n' to do a dice roll. Enter 'n' to stop " << endl;
 		cin >> userinput;
-		temp = d1->roll();
-		rolls++;
+		rolls++;                  //increment roll counter after every roll
 		pointer = new int[rolls]; // set the array dynamically according to number of rolls each time
 		                          //dynamically allocated arrays allows an array of increasing size
 		                          //Dynamic Memory Allocation allows you to use a variable to specify the array size
 
-		cout << "Result is: " << temp << endl; //Display the result
-		cout << "Number of Rolls: " << rolls << endl;
-		cout << "Average is " << average(*d1, rolls) << endl;
+		temp = d1->roll();
+		*(pointer + (rolls - 1)) = temp; //write the result successively to an array index
 
+	
+		/*Attempt to print out the entire array with the recorded values to verify*/
 
-		//Fill out the array with each index holding the result value of each of the rolls respectively
-		for (int counter = 0; counter < rolls; counter++)
-		{
-			*(pointer + counter) = temp; // assign the next array index value with the value stored in temp			   
-			//memory addresses in arrays are left justified so increment by one to get to next value	
-		}
-		for (int counter = 0; counter < rolls; counter++)
-		{
-			cout << "Index " << counter << " is " << *(pointer + counter) << endl; //We already filled out the array previously
-		}
-
+		cout << "Result: " << temp << endl;
+		cout << "Rolls: " << rolls << endl;
+		cout << "Average: " << average(pointer[rolls], rolls) << endl;
+		cout << "Index " << (rolls - 1) << " is " << *(pointer + (rolls - 1)) << endl;
 	}
+
+	//Print out array to show recorded values
+	/**for (int counter = 0; counter < rolls; counter++)
+	{
+		cout << "Index " << counter << " is " << *(pointer + counter) << endl;
+	}**/
 	
 
 	delete pointer;
@@ -109,5 +107,18 @@ float average(Dice d, int rolls)
 	return ave;	
 }
 
+float average(int arr[], int arraylength)
+{ 
+	float ave = 0.00;
+	int addresult = 0;
+
+	for (int counter = 0; counter < arraylength; counter++)
+	{
+		addresult = addresult + arr[counter];
+		ave = float(addresult / arraylength);
+	}
+
+	return ave;
+}
 //
 
