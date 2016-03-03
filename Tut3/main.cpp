@@ -52,8 +52,14 @@ int main()
 	char userinput = 'x';
 	Dice *d1 = new Dice(); // creating a dice object with default constructor
 
-	//Do a roll
-	d1->roll();
+	//The user should be able to keep rolling his dice unless he enters a specific character to terminate the game
+	while (userinput != 'n')
+	{
+		cout << "Enter any character EXCEPT 'n' to do a dice roll. Enter 'n' to stop " << endl;
+		cin >> userinput;
+
+		d1->roll();
+	}
 
 	system("PAUSE");
 	return 0;
