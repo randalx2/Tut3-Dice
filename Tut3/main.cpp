@@ -3,6 +3,14 @@
 /*COMPUTER METHODS 3 - TUT3*/
 /*DICE GAME: This program is meant to simulate a dice using classes and overloaded global functions*/
 
+/*4 MARCH 2016****************************************************************************************************/
+/*The program uses type casting to force a return of a floating point datatype when doing operations on integers*/
+/*Due to this, the program may be hardware intensive. The dice overloading function works well on machines with*/
+/*4GB and 8GB of ram. However the array overloading function has a chance of giving inaccurate values after 25 rolls**/
+/*on older machines with less ram and processing power. When tested on my i5 laptop with 8GB ram it showed no inaccuracies */
+/*Deleting the dynamically created array seemed to trigger a break point at run time. Therefore this part was commented out*/
+/*Program was finally tested and all core specs have been met but please consider the above points**************************/
+/***************************************************************************************************************************/
 #include <iostream>
 #include <cstdio>
 #include <cmath>
