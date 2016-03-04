@@ -91,8 +91,9 @@ int main()
 		cout << "Average from Dice Overloaded Function : " << average(*d1, rolls) << endl;  // Function always works successfully!
 
 		//Setting up array for passing it to overloaded function
-		pointer[rolls - 1] = temp;
-		cout << "Average from Array Overloaded Function: " << average(pointer, rolls) << endl;	//Function works successfully up to 19 rolls
+		//pointer[rolls - 1] = temp;    ***This method is correct too for referencing arrays with pointers
+		*(pointer + (rolls - 1)) = temp;
+		cout << "Average from Array Overloaded Function: " << average(pointer, rolls) << endl;	//Function works successfully up to 19 rolls. Don't pass array using pointer reference
 	}                                                                                           //Break point is triggered upon termination
 
 	//delete pointer; -- commented this out due to break point triggering bug
@@ -116,7 +117,8 @@ float average(int arr[], int arraylength)
 
 	for (int counter = 0; counter < arraylength; counter++)
 	{
-		addresult = addresult + arr[counter];
+		addresult = addresult + arr[counter]; //Could also write *(arr + counter)
+		cout << "Index " << counter << " is " << *(arr + counter) << endl; //Display the values stored in the array with each roll
 	}
 	ave = (float)addresult / (float)arraylength;
 
