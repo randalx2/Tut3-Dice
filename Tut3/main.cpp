@@ -118,7 +118,7 @@ float average(int arr[], int arraylength)
 	for (int counter = 0; counter < arraylength; counter++)
 	{
 		addresult = addresult + arr[counter]; //Could also write *(arr + counter)
-		cout << "Index " << counter << " is " << *(arr + counter) << endl; //Display the values stored in the array with each roll
+		cout << "Roll " << counter + 1 << " is " << *(arr + counter) << endl; //Display the values stored in the array with each roll
 	}
 	ave = (float)addresult / (float)arraylength;
 
