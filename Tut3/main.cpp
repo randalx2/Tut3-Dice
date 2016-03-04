@@ -87,7 +87,8 @@ int main()
 		cout << "Average from Array Overloaded Function: " << average(pointer, rolls) << endl;	//Function works successfully up to 19 rolls
 	}                                                                                           //Break point is triggered upon termination
 
-	delete pointer;
+	//delete pointer; -- commented this out due to break point triggering bug
+
 	delete d1;  //Done using dice object so remove it from memory
 	system("PAUSE");
 	return 0;
