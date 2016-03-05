@@ -68,8 +68,8 @@ int main()
 {
 	int temp = 0;          //temporarily hold the result of the roll here to avoid using the randomizer by calling the roll method
 	int rolls = 0;
-	int *pointer = new int[rolls];   // initialize array pointer
-	
+	int *pointer = NULL;   // initialize array pointer
+	pointer = new int[rolls];
 	                         // set the array dynamically according to number of rolls each time
 	                         //dynamically allocated arrays allows an array of increasing size
 	                        //Dynamic Memory Allocation allows you to use a variable to specify the array size
@@ -96,7 +96,8 @@ int main()
 		cout << "Average from Array Overloaded Function: " << average(pointer, rolls) << endl;	//Function works successfully up to 19 rolls. Don't pass array using pointer reference
 	}                                                                                           //Break point is triggered upon termination
 
-	//delete pointer; -- commented this out due to break point triggering bug
+	//delete [] pointer; 
+	pointer = NULL; //setting this to NULL seems to reduce possibility of break point run time error
 
 	delete d1;  //Done using dice object so remove it from memory
 	system("PAUSE");
